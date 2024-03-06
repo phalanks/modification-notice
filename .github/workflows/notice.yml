@@ -32,7 +32,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: |
-                hoge ディレクトリ配下のファイルが編集されました。
-                改行はいけるのかな？
+              body: `ええー。`
             })
