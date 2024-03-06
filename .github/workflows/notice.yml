@@ -6,7 +6,7 @@ on:
     - reopened
     - synchronize
     paths:
-    - hoge/*
+    - *
 
 jobs:
   notice-i18n-tasks:
@@ -22,13 +22,13 @@ jobs:
       id: diff-check-opened
       if: github.event.action == 'opened' || github.event.action == 'reopened'
       run: |
-        echo "diff-count=1" >> $GITHUB_OUTPUT
+        echo "diff-count=$(.github/workflows/list-targets.sh hoge | wc -l)" >> $GITHUB_OUTPUT
 
     - name: Check the diffs when the content in the PR updated
       id: diff-check-updated
       if: github.event.action == 'synchronize'
       run: |
-        echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
+        echo "diff-count=$(.github/workflows/list-targets.sh hoge ${{ github.event.before }} ${{ github.event.after }} | wc -l)" >> $GITHUB_OUTPUT
 
     - name: Send notice on the issue
       if: steps.diff-check-opened.outputs.diff-count > 0 || steps.diff-check-updated.outputs.diff-count > 0
