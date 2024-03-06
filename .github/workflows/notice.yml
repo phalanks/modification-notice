@@ -1,31 +1,38 @@
-name: workflow
+name: Notice i18n Tasks
 on:
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types:
+    - opened
+    - reopened
+    - synchronize
     paths:
-      - hoge/*
+    - hoge/*
 
 jobs:
-  comment-on-pull-request:
+  notice-i18n-tasks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 100
-          ref: ${{ github.head_ref }}
-      - id: diff-check
+      - uses: actions/checkout@v4
+
+      - name : Check the diffs when the issue is opened
+        id: diff-check-opened
+        if: github.event.action == 'opened' || github.event.action == 'reopened'
+        run: echo "count=1" >> $GITHUB_OUTPUT
+
+      - name: Check the diffs when the content in the PR updated
+        id: diff-check-updated
         if: github.event.action == 'synchronize'
-        run: echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
-      - id: no-diff-check
-        if: github.event.action != 'synchronize'
-        run: echo "diff-count=1" >> $GITHUB_OUTPUT
+        run: echo "count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
+
       - uses: actions/github-script@v6
-        if: steps.diff-check.outputs.diff-count > 0 || steps.no-diff-check.outputs.diff-count > 0
+        if: steps.diff-check-opened.outputs.diff-count > 0 || steps.diff-check-updated.outputs.diff-count > 0
         with:
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `hoge ディレクトリ配下のファイルが編集されました。`
+              body: |
+                hoge ディレクトリ配下のファイルが編集されました。
+                改行はいけるのかな？
             })
