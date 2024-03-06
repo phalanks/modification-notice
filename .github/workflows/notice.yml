@@ -28,7 +28,9 @@ jobs:
       - name: Check the diffs when the content in the PR updated
         id: diff-check-updated
         if: github.event.action == 'synchronize'
-        run: echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
+        run: |
+          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
 
       - name: Send notice on the issue
         if: steps.diff-check-opened.outputs.diff-count > 0 || steps.diff-check-updated.outputs.diff-count > 0
