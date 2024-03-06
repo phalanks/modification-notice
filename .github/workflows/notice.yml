@@ -21,7 +21,9 @@ jobs:
       - name : Check the diffs when the issue is opened
         id: diff-check-opened
         if: github.event.action == 'opened' || github.event.action == 'reopened'
-        run: echo "diff-count=1" >> $GITHUB_OUTPUT
+        run: |
+          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          echo "diff-count=1" >> $GITHUB_OUTPUT
 
       - name: Check the diffs when the content in the PR updated
         id: diff-check-updated
