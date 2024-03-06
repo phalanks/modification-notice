@@ -1,4 +1,6 @@
 #!/bin/bash
+# This script lists files that have been added or edited under a specified directory,
+# including the targets of any symlinks.
 
 set -e
 
