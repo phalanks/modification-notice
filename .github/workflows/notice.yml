@@ -29,16 +29,24 @@ jobs:
         run: echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
 
       - name: Send notice on the issue
-        uses: actions/github-script@v6
         if: steps.diff-check-opened.outputs.diff-count > 0 || steps.diff-check-updated.outputs.diff-count > 0
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `改行は
-できるかな？
-## MDは
-どうかな？`,
-            })
+          message: |
+            改行は
+            できるかな？
+            ## MDは
+            どうかな？
+
+#        uses: actions/github-script@v6
+#        with:
+#          script: |
+#            github.rest.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: `改行は
+#                できるかな？
+#                ## MDは
+#                どうかな？`,
+#            })
