@@ -33,7 +33,6 @@ jobs:
       uses: thollander/actions-comment-pull-request@v2
       with:
         message: |
-          ### [Action Required]
 		      You are adding or updating English content so please take the following actions
           for other languages.
 		      - If you add new content under `website/content/en` or targets of the symbolic links
