@@ -45,10 +45,7 @@ jobs:
   comment-on-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 100
-          ref: ${{ github.head_ref }}
+      - uses: actions/checkout@v4
       - id: diff-check
         if: github.event.action == 'synchronize'
         run: echo "diff-count=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge | wc -l)" >> $GITHUB_OUTPUT
