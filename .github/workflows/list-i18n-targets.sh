@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ "$#" -ne 1 ] && [ "$#" -ne 3 ]; then
     echo "The number of arguments must be either 1 or 3."
     echo "Usage: ./list-targets.sh [path] <[commit] [commit]>"
