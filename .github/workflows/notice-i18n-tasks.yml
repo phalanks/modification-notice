@@ -47,7 +47,8 @@ jobs:
       with:
         comment_tag: execution
         message: |
-          ${{ github.event.after }}
+          github.sha: ${{ github.sha }}
+          github.event.after: ${{ github.event.after }}
           ### Action Required
           You are adding or updating English content so please take the following actions for other languages.
           - If you add new content under `website/content/en` or targets of the symbolic links in the same directory, please replicate it in the corresponding directories of all other languages. (e.g. If you create `website/content/en/blog/new-post.md`, you should copy it to `website/content/ja/blog/new-post.md`, etc.)
