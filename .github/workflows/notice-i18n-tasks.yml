@@ -40,10 +40,10 @@ jobs:
     - name: Check diffs
       id: check-diffs
       run: |
-        echo "diff-count=$(.github/workflows/deep-diff.sh hoge ${{ github.sha }} ${{ github.event.pull_request.head.sha }} | wc -l)" >> $GITHUB_OUTPUT
+        echo "count=$(.github/workflows/deep-diff.sh hoge ${{ github.sha }} ${{ github.event.pull_request.head.sha }} | wc -l)" >> $GITHUB_OUTPUT
 
     - name: Send notice on the issue
-      if: steps.check-diffs.outputs.diff-count > 0
+      if: steps.check-diffs.outputs.count > 0
       uses: thollander/actions-comment-pull-request@v2
       with:
         comment_tag: execution
