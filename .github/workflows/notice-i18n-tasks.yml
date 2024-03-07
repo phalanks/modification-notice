@@ -17,12 +17,15 @@ jobs:
     - name: Debug
       run: |
         echo "${{ github.ref }}"
-        git log --oneline --no-abbrev-commit
 
     - name: Check out
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+
+    - name: Debug 2
+      run: |
+        git log --oneline --no-abbrev-commit
 
     - name : Check the diffs when the issue is opened
       id: diff-check-opened
