@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Debug
       run: |
-        echo "${{ github.head_ref }}"
+        echo "${{ github.ref }}"
 
     - name: Check out
       uses: actions/checkout@v4
