@@ -9,6 +9,10 @@ on:
 jobs:
   notice-i18n-tasks:
     runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+
     steps:
     - name: Debug
       run: |
