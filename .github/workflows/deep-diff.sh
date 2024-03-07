@@ -4,9 +4,9 @@
 
 set -e
 
-if [ "$#" -ne 2 ] && [ "$#" -ne 3 ]; then
-    echo "The number of arguments must be either 2 or 3."
-    echo "Usage: ./list-targets.sh [path] [commit-before] <[commit-after]>"
+if [ "$#" -ne 3 ]; then
+    echo "The number of arguments must be 3."
+    echo "Usage: ./list-targets.sh [path] [commit-before] [commit-after]"
     exit 1
 fi
 
