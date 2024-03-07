@@ -17,6 +17,7 @@ jobs:
     - name: Debug
       run: |
         echo "${{ github.ref }}"
+        echo git log --oneline --no-abbrev-commit
 
     - name: Check out
       uses: actions/checkout@v4
