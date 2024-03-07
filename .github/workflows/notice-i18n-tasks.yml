@@ -10,10 +10,13 @@ jobs:
   notice-i18n-tasks:
     runs-on: ubuntu-latest
     steps:
+    - name: Debug
+      run: |
+        echo "${{ github.ref }}"
+
     - name: Check out
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }}
         fetch-depth: 0
 
     - name : Check the diffs when the issue is opened
